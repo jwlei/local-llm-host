@@ -120,9 +120,24 @@ shows them too, with copy buttons.
 powershell -ExecutionPolicy Bypass -File scripts\create_shortcut.ps1
 ```
 
-With `APP_PASSWORD` set, the shortcut also lets in your other devices. Add `-Startup` to start it when you sign in
-to Windows instead. Stop it with **Shut down** in the menu. Its output goes to `data/logs/app.log`, and llama-server's
-to `data/logs/llama-server.log`.
+With `APP_PASSWORD` set, the shortcut also lets in your other devices. Stop it with **Shut down** in the menu.
+
+**Start it by itself when you sign in to Windows**, headless (in the background, no console window, no browser):
+
+```
+powershell -ExecutionPolicy Bypass -File scripts\enable_startup.ps1
+```
+
+Add `-Now` to also start it straight away. To turn that off again:
+
+```
+powershell -ExecutionPolicy Bypass -File scripts\disable_startup.ps1
+```
+
+Or double-click `scripts\enable_startup.cmd` and `scripts\disable_startup.cmd`. Turning it off doesn't stop a copy
+that is running now: use **Shut down** for that.
+
+Its output goes to `data/logs/app.log`, and llama-server's to `data/logs/llama-server.log`.
 
 ## Tests
 

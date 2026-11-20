@@ -1,7 +1,8 @@
 # Creates a "local-llm-host" shortcut on the Desktop and in the Start menu that runs start.pyw: starts the app
 # (port 8810) with no console window and opens it in your browser. Safe to re-run.
 #   powershell -ExecutionPolicy Bypass -File scripts\create_shortcut.ps1
-#   Add -Startup to start it, without opening a browser, when you sign in to Windows instead.
+#   Add -Startup to put it in the Startup folder instead (headless). scripts\enable_startup.ps1 does this for you,
+#   and scripts\disable_startup.ps1 undoes it.
 
 param([switch]$Startup)
 
