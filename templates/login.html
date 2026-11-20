@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Sign in — local-llm-host</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+</head>
+<body class="login-page">
+<div class="login">
+  <h1><span class="login-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H10l-5 4v-4H4z"/></svg></span>local-llm-host</h1>
+  <p class="sub">Enter the password to continue.</p>
+  <form class="card{% if error %} wrong{% endif %}" method="post" id="loginForm">
+    <div class="loading" aria-hidden="true"></div>
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" autocomplete="current-password" autofocus required>
+    {% if error %}<div class="err" role="alert">{{ error }}</div>{% endif %}
+    <button type="submit" id="loginButton"><span class="spinner" aria-hidden="true"></span><span id="loginLabel">Sign in</span></button>
+  </form>
+</div>
+<script defer src="{{ url_for('static', filename='login.js') }}"></script>
+</body>
+</html>

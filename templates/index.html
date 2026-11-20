@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#171922">
+<title>local-llm-host</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 5h16v11H10l-5 4v-4H4z' fill='%23a07cff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+</head>
+<body>
+<div class="app" id="app">
+  <header class="chat-head">
+    <div class="chat-heading">
+      <div class="chat-title" id="chatTitle">local-llm-host</div>
+      <span class="chat-thinking" id="chatThinking" aria-live="polite" hidden></span>
+    </div>
+    <span class="hint" id="chatNote" aria-live="polite"></span>
+    <div class="pop-wrap">
+      <button type="button" class="chat-context" id="chatContext" aria-expanded="false" aria-controls="chatContextInfo" title="How much of the model's context this chat takes: tap for the parts"></button>
+      <div class="pop chat-context-info" id="chatContextInfo" role="status" hidden></div>
+    </div>
+    <button type="button" class="icon-btn" id="appMenuButton" aria-haspopup="menu" aria-expanded="false" aria-label="Menu" title="Model, devices and shut down">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.8" fill="currentColor"/><circle cx="12" cy="12" r="1.8" fill="currentColor"/><circle cx="19" cy="12" r="1.8" fill="currentColor"/></svg>
+    </button>
+  </header>
+
+  <main class="chat-box">
+    <div class="chat-log" id="chatLog" role="log" tabindex="0"></div>
+    <div class="progress-track"><div class="progress" id="chatProgress" hidden></div></div>
+  </main>
+
+  <footer class="chat-bottom">
+    <!-- Clear on the left; the saved chats and the model in the middle, each list growing up out of it; a new chat on the right. -->
+    <div class="chat-foot">
+      <button type="button" class="icon-btn" id="chatClear" aria-label="Clear chat" title="Clear this chat: its messages and context go; the other chats stay under Sessions (tap twice)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 21h10M5.5 14.5l7-7 5 5-7 7H8z"/><path d="M12.5 7.5l2-2a1.4 1.4 0 0 1 2 0l3 3a1.4 1.4 0 0 1 0 2l-2 2"/></svg>
+      </button>
+      <div class="chat-pickers">
+        <div class="pop-wrap">
+          <div class="pop chat-menu chat-sessions-menu" id="chatSessionsMenu" role="menu" aria-label="Saved chats" hidden></div>
+          <button type="button" class="chat-picker" id="chatSessions" aria-haspopup="menu" aria-expanded="false" title="Saved chats: open one to carry on">Sessions</button>
+        </div>
+        <div class="pop-wrap">
+          <div class="pop chat-menu" id="chatModelMenu" role="menu" aria-label="Model" hidden></div>
+          <button type="button" class="chat-picker" id="chatModel" aria-haspopup="menu" aria-expanded="false" title="The model that replies: tap to change"></button>
+        </div>
+      </div>
+      <button type="button" class="icon-btn" id="chatNew" aria-label="New chat" title="New chat: this one stays under Sessions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H10l-5 4v-4H4z"/><path d="M12 7.5v5M9.5 10h5"/></svg>
+      </button>
+    </div>
+    <div class="chat-editing" id="chatEditing" hidden><span>Editing your message: sending replaces it and the replies after it.</span><button type="button" id="chatEditCancel">Cancel</button></div>
+    <div class="chat-attached" id="chatAttached" hidden></div>
+    <div class="chat-compose">
+      <textarea id="chatInput" rows="2" maxlength="16000" placeholder="Message" aria-label="Message"></textarea>
+      <div class="chat-compose-side">
+        <button type="button" class="chat-send" id="chatAttach" aria-label="Add an image" title="Add an image for the model to look at (models marked vision see images)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+        <button type="button" class="chat-send" id="chatSend" aria-label="Send" title="Send"></button>
+      </div>
+      <input type="file" id="chatFile" accept="image/*" multiple hidden>
+    </div>
+  </footer>
+
+  <div class="pop chat-msg-menu" id="chatMsgMenu" role="menu" hidden></div>
+  <div class="pop app-menu" id="appMenu" role="menu" aria-label="Menu" hidden></div>
+</div>
+<script>window.APP = {{ {"protected": protected, "version": version} | tojson }};</script>
+<script defer src="{{ url_for('static', filename='chat.js') }}"></script>
+</body>
+</html>

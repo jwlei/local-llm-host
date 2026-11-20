@@ -1,0 +1,17 @@
+# Secrets
+.env
+
+# What it keeps: chats, images, logs
+/data
+
+# Your models
+/models/*
+!/models/README.md
+
+__pycache__/
+*.pyc
+venv/
+.venv/
+.vscode/settings.json
+.DS_Store
+Thumbs.db
